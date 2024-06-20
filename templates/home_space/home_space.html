@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row m-0 p-0" style="height: 80vh;">
+    <div class="col-6 h-100">
+        <h1 class="display-6 fw-bold text-center pt-5">Detect Cancer, Colitis, and Polyps</h1>
+        <p class="m-5 px-5 fs-5">
+            ColoSensus is a convolutional-neural-network (CNN) based web application trained to predict and identify features indicative of Colorectal Cancer, Ulcerative Colitis, and Colon Polyps. The CNN model was trained using the HyperKvasir, a public dataset specifically designed for disease classification tasks.
+        </p>
+        <div class="d-flex justify-content-center">
+            <a href="{% url 'results' %}"><button type="button" class="btn btn-secondary btn-lg"><span class="mx-5">Get Started</span></button></a>
+        </div>
+    </div>
+    <div class="col-6 p-0 h-100">
+        <div class="w-100 h-100" style="background-color: black; position: relative;">
+            <div class="w-100 h-100" style="background-image: linear-gradient(to left, rgba(255, 0, 0, 0), rgb(255, 255, 255)); position: absolute"></div>
+            <img src="{% static 'Colon.png' %}" style="width: 100%; height: 100%; background-image: linear-gradient(to left, rgba(255, 0, 0, 0), rgb(255, 255, 255));">
+        </div>
+    </div>
+</div>
+{% endblock content %}

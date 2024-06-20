@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="spinner-overlay" id="spinner-overlay"></div>
+<div class="spinner" id="spinner"></div>
+<div class="row m-0 p-0" style="height: 40vh;">
+    <div class="col-6 h-100">
+        
+        <h1 class="display-6 fw-bold pt-4">Predict</h1>
+        <div class="d-flex justify-content-center">
+            <form enctype="multipart/form-data" method="POST" action="" id="predictForm">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" class="btn btn-secondary btn-lg mx-auto" value="Predict" id="predictButton">
+            </form>
+            <!--<a href="#"><button type="button" class="btn btn-secondary btn-lg"><span class="mx-3">Upload Image</span></button></a>-->
+        </div>
+        <p class="pt-1 text-secondary align-text-bottom">
+            The model only takes in colonoscopy videos with the diseases it was trained on. Make sure that the video is indicative of Colorectal Cancer, Ulcerative Colitis, or Colon Polyps
+        </p>
+    </div>
+    <div class="col-6 p-0 h-100">
+        <div class="w-100 h-100 d-flex align-items-center" style="position: relative;">
+            <div class="align-self-center m-auto text-center border border-5" style="background-color: rgb(182, 182, 182); width: 50%; height: 80%;">
+                {% if videofile_url %}
+                    <video style="width: 100%; height: 100%;" controls>
+                        <source src="{{ MEDIA_URL }}{{ videofile_url }}" type='video/mp4'>
+                        Your browser does not support the video tag.
+                    </video>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row m-0 p-0">
+    <h1 class="display-6 fw-bold">Results</h1>
+    {% if predicted_class %}
+        {% if predicted_class == "Healthy" %}
+            <p class="fs-2 ps-4" id="statusMessage" style="font-weight: bolder; margin-top: -10px; color: rgb(9, 108, 0)">Colon is healthy</p>
+        {% else %}
+            <p class="fs-2 ps-4" id="statusMessage" style="font-weight: bolder; margin-top: -10px; color: rgb(173, 0, 0)">Possible manifestations of {{ predicted_class }}</p>
+        {% endif %}
+            {% if predicted_class == "Healthy" %}
+                <p class="px-5 fs-5" id="statusUpdate">The given input shows a healthy colon. Further verification is suggested to ensure if colon is healthy. </p>
+            {% elif predicted_class == "Colorectal Cancer" %}
+                <p class="px-5 fs-5" id="statusUpdate">The given input shows consistent with colorectal cancer. Further evaluation with biopsies and imaging studies may be necessary for confirmation and to determine the extent of the disease. </p>
+            {% elif predicted_class == "Ulcerative Colitis" %}
+                <p class="px-5 fs-5" id="statusUpdate">The video shows manifestations consistent with ulcerative colitis. Follow-up with a gastroenterologist for clinical evaluation, imaging studies, and possibly colonoscopy with biopsies is recommended for confirmation and treatment planning.</p>
+            {% elif predicted_class == "Colon Polyps" %}
+                <p class="px-5 fs-5" id="statusUpdate">The video shows manifestations consistent with colon polyps. Endoscopic removal of polyps may be indicated. Follow-up surveillance colonoscopy may also be recommended depending on the number, size, and histology of the polyps.</p>
+            {% endif %}
+    {% else %}
+    <p class="changer px-5 fs-3" id="statusMessage">Waiting for input.</p>
+    {% endif %}
+    
+</div>
+
+<script>
+    document.getElementById("predictForm").addEventListener("submit", function() {
+        document.getElementById("spinner").style.display = "block";
+        document.getElementById("spinner-overlay").style.display = "block";
+        document.getElementById("statusMessage").textContent = "Making predictions. Please wait.";
+        document.getElementById("statusUpdate").textContent = " ";
+    });
+</script>
+{% endblock content %}

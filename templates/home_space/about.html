@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="row m-0">
+        <div class="col">
+            <h3 class="fw-bold pt-3">What is<span class="display-6" style="font-weight: 400; color: rgb(94, 9, 9);">
+                Colo<span class="display-6 m-0" style="font-weight: 400; color: rgb(29, 51, 17); ">Sensus</span>
+              </span>?
+            </h3>
+            <p class="fs-5 ms-4">
+                ColoSensus is a web-application integrated with a machine learning model. 
+                It is mainly designed and trained to predict and detect a healthy colon and colons with
+                indicators of colorectal cancer, ulcerative colitis, and colon polyps. 
+                Colosensus only takes in colonoscopy videos instead of
+                images, reducing the burden of saving key frames from the users' end.
+            </p>
+            
+        </div>
+        <div class="col">
+            <h3 class="fw-bold pt-3">How does<span class="display-6" style="font-weight: 400; color: rgb(94, 9, 9);">
+                Colo<span class="display-6 m-0" style="font-weight: 400; color: rgb(29, 51, 17); ">Sensus</span>
+              </span>predict diseases?
+            </h3>
+            <p class="fs-5 ms-4">
+                ColoSensus' model harnesses the power of convolutional neural networks to interpret videos frame by frame.
+                This type of neural network gathers information from features standing out per frame and gathers more from the
+                temporal (or time) aspect to finally predict whether the given colonoscopy video shows a healthy colon or a colon with
+                manifestations of colorectal
+                cancer, ulcerative colitis, or colon polyps.
+            </p>
+        </div>
+    </div>
+    <div class="row m-0">
+        <div class="col">
+            <h3 class="fw-bold pt-3">How accurate is<span class="display-6" style="font-weight: 400; color: rgb(94, 9, 9);">
+                Colo<span class="display-6 m-0" style="font-weight: 400; color: rgb(29, 51, 17); ">Sensus</span>
+              </span>'s prediction?
+            </h3>
+            <p class="fs-5 ms-4">
+                ColoSensus's model was evaluated using an unseen dataset, 
+                meaning it relied on the information it gathered
+                during training. It boasted an <b>82%</b> accuracy,
+                <b>87%</b> precision, <b>82%</b> recall,
+                and achieved an F1-Score of <b>79%</b>.
+                Moreover, the model learned on several cycles
+                of training to ensure it captured
+                the most complex patterns found
+                on each case of colon disease.
+            </p>
+            
+        </div>
+    </div>
+{% endblock content %}
