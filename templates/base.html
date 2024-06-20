@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'global.css' %}">
+    <title>Base</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <style>
+      .spinner {
+        display: none;
+        border: 16px solid #f3f3f3; 
+        border-top: 16px solid #933030; 
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        animation: spin 2s linear infinite;
+        position: fixed; 
+        top: 37%;
+        left: 45%;
+        transform: translate(-50%, -50%); 
+        z-index: 9999;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      .spinner-overlay {
+        display: none; 
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); 
+        z-index: 9998; 
+      }
+    </style>
+</head>
+<body>
+  <div class="vh-100">
+        <div class="row m-0" style="background-color: rgb(236, 236, 236); height: 10vh;">
+          <div class="col align-self-center">
+            <span class="display-5 m-3" style="font-weight: bolder; color: rgb(94, 9, 9);">
+              Colo<span class="display-5 m-0" style="font-weight: bolder; color: rgb(29, 51, 17); ">Sensus</span>
+            </span>
+          </div>
+          <div class="col d-flex flex-row-reverse align-self-center">
+            <a href="{% url 'home' %}" class="fs-4 nav-link me-4 text-secondary">Home</a>
+            <a href="{% url 'about' %}" class="fs-4 nav-link me-4 text-secondary">About</a>
+          </div>
+        </div>
+        {% block content %}
+        {% endblock %}
+        <div class="position-absolute m-0 bottom-0 row vw-100 align-items-center" style="height: 10vh; background-color: rgb(236, 236, 236);">
+            <p class="fw-light my-0 align-middle text-end">This web application only serves as a support-decision tool. It should not be solely used by clinicians as a definitive diagnostics tool.</p>
+            <p class="fw-normal align-middle text-end" style="color: maroon;">University of the Philippines Manila (2024)</p>
+        </div>
+  </div>
+</body>
+</html>
